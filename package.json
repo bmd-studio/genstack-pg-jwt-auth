@@ -1,7 +1,5 @@
 {
-  "name": "@bmd-studio/genstack-container-pg-jwt-auth",
-  "version": "1.0.0",
-  "description": "Generic JWT authentication container using identities stored in Postgres.",
+  "private": true,
   "main": "dist/index.js",
   "types": "dist/index",
   "scripts": {
@@ -16,8 +14,6 @@
     "dc": "docker-compose --env-file=./env/defaults -f docker-compose.yml --compatibility",
     "dc:dev": "yarn dc -f docker-compose.development.yml"
   },
-  "author": "Pepijn Verburg",
-  "license": "MIT",
   "dependencies": {
     "apollo-server-express": "^2.11.0",
     "bcrypt": "^4.0.1",

@@ -7,7 +7,6 @@ services:
       context: ./
       args:
         - GS_ENV
-        - BMD_NPM_TOKEN
         - DOCKER_IMAGE
     init: true  
     cap_drop: 
