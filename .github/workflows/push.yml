@@ -1,4 +1,4 @@
-name: Pg JWT Auth Container Test
+name: Pg JWT Auth Container Test Workflow
 on: push
 jobs:
   test:
