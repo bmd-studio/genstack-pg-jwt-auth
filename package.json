@@ -4,6 +4,7 @@
   "main": "dist/index.js",
   "types": "dist/index",
   "scripts": {
+    "setup": "yarn install",
     "start": "NODE_OPTIONS=\"--inspect=0.0.0.0:$DEFAULT_DEBUG_PORT\" ts-node src/index.ts",
     "start:prod": "node dist/index.js",
     "test": "yarn test:unit",
@@ -29,6 +30,7 @@
     "@types/bcrypt": "^3.0.0",
     "@types/debug": "^4.1.5",
     "@types/get-port": "^4.2.0",
+    "@types/jest": "^26.0.10",
     "@types/jsonwebtoken": "^8.3.8",
     "@types/lodash": "^4.14.149",
     "@types/pg": "^7.14.3",
