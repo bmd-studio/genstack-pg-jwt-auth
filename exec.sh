@@ -26,6 +26,7 @@ module.exports = {
         }
     ]
 }" >> /tmp/pm2.config.js
+    npm run build
     pm2-runtime start /tmp/pm2.config.js
 else
     echo "Running production mode..."
