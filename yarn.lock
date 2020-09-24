@@ -677,13 +677,6 @@
   dependencies:
     "@types/node" "*"
 
-"@types/get-port@^4.2.0":
-  version "4.2.0"
-  resolved "https://registry.yarnpkg.com/@types/get-port/-/get-port-4.2.0.tgz#4fc44616c737d37d3ee7926d86fa975d0afba5e4"
-  integrity sha512-Iv2FAb5RnIk/eFO2CTu8k+0VMmIR15pKbcqRWi+s3ydW+aKXlN2yemP92SrO++ERyJx+p6Ie1ggbLBMbU1SjiQ==
-  dependencies:
-    get-port "*"
-
 "@types/graphql-upload@^8.0.0":
   version "8.0.3"
   resolved "https://registry.yarnpkg.com/@types/graphql-upload/-/graphql-upload-8.0.3.tgz#b371edb5f305a2a1f7b7843a890a2a7adc55c3ec"
@@ -1927,7 +1920,7 @@ docker-modem@^2.1.0:
     split-ca "^1.0.1"
     ssh2 "^0.8.7"
 
-dockerode@^3.2.0:
+dockerode@^3.2.1:
   version "3.2.1"
   resolved "https://registry.yarnpkg.com/dockerode/-/dockerode-3.2.1.tgz#4a2222e3e1df536bf595e78e76d3cfbf6d4d93b9"
   integrity sha512-XsSVB5Wu5HWMg1aelV5hFSqFJaKS5x1aiV/+sT7YOzOq1IRl49I/UwV8Pe4x6t0iF9kiGkWu5jwfvbkcFVupBw==
@@ -2378,7 +2371,7 @@ get-caller-file@^2.0.1:
   resolved "https://registry.yarnpkg.com/get-caller-file/-/get-caller-file-2.0.5.tgz#4f94412a82db32f36e3b0b9741f8a97feb031f7e"
   integrity sha512-DyFP3BM/3YHTQOCUL/w0OZHR0lpKeGrxotcHWcqNEdnltqFwXVfhEBQ94eIo34AfQpo0rGki4cyIiftY06h2Fg==
 
-get-port@*, get-port@^5.1.1:
+get-port@^5.1.1:
   version "5.1.1"
   resolved "https://registry.yarnpkg.com/get-port/-/get-port-5.1.1.tgz#0469ed07563479de6efb986baf053dcd7d4e3193"
   integrity sha512-g/Q1aTSDOxFpchXC4i8ZWvxA1lnPqx/JHqcpIw0/LX9T8x/GBbi6YnlN5nhaKIFkT8oFsscUKgDJYxfwfS6QsQ==
@@ -5091,16 +5084,16 @@ test-exclude@^6.0.0:
     glob "^7.1.4"
     minimatch "^3.0.4"
 
-testcontainers@^2.8.1:
-  version "2.20.0"
-  resolved "https://registry.yarnpkg.com/testcontainers/-/testcontainers-2.20.0.tgz#1d3977346e5724fc6f88e543774101d8529001a6"
-  integrity sha512-kq3oOf/ayA8qo9aqChcmBNB/Yjd5LBH17FsiD7zqlpXktXCQMrWJfM3qD82RwpHrPDobhLiopwTcBhIkJuMXJg==
+testcontainers@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/testcontainers/-/testcontainers-4.1.0.tgz#43d5b255e8fedf68d238d16bade2a4322c6807ab"
+  integrity sha512-v29nwrlZE0ysTlPCPWnXkl9teEGzqLrm4lQDgqrFsFP5LQB1a9QCsYDXubPN6ajzBVwF+B2E+1caGk/BOeUx4w==
   dependencies:
     "@types/dockerode" "^2.5.34"
     byline "^5.0.0"
     debug "^4.1.1"
     docker-compose "^0.23.5"
-    dockerode "^3.2.0"
+    dockerode "^3.2.1"
     get-port "^5.1.1"
     glob "^7.1.6"
     node-duration "^1.0.4"
