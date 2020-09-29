@@ -25,7 +25,8 @@
     "graphql": "^14.6.0",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.15",
-    "pg": "^7.18.2"
+    "pg": "^7.18.2",
+    "uuid": "^8.0.0"
   },
   "devDependencies": {
     "@types/bcrypt": "^3.0.0",
@@ -46,7 +47,6 @@
     "testcontainers": "^2.8.1",
     "ts-jest": "^25.2.1",
     "ts-node": "^8.9.1",
-    "typescript": "^3.8.3",
-    "uuid": "^8.0.0"
+    "typescript": "^3.8.3"
   }
 }
