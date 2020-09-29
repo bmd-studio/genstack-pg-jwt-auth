@@ -45,7 +45,7 @@
     "rimraf": "^3.0.2",
     "supertest": "^4.0.2",
     "testcontainers": "^2.8.1",
-    "ts-jest": "^25.2.1",
+    "ts-jest": "^25.5.1",
     "ts-node": "^8.9.1",
     "typescript": "^3.8.3"
   }
