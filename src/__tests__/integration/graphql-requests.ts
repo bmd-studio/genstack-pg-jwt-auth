@@ -1,7 +1,7 @@
 import request from 'supertest';
 
-import { app } from '../server';
-import environment from '../environment';
+import { app } from '../../server';
+import environment from '../../environment';
 
 const {
   GRAPHQL_PATH,

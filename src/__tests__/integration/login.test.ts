@@ -3,9 +3,9 @@ import request from 'supertest';
 import crypto from 'crypto';
 import HttpStatus from 'http-status-codes';
 
-import environment from '../environment';
-import { setupTestApp, shutdownTestApp } from './setup/app';
-import identityFixture, { identityUsername, identityPassword } from './fixtures/identity';
+import environment from '../../environment';
+import { setupTestApp, shutdownTestApp } from '../setup/app';
+import identityFixture, { identityUsername, identityPassword } from '../fixtures/identity';
 import { getHttpRequest } from './graphql-requests';
 
 const {

@@ -1,9 +1,9 @@
 import jwt from 'jsonwebtoken';
 import request from 'supertest';
 
-import environment from '../environment';
-import { setupTestApp, shutdownTestApp } from './setup/app';
-import { identityUsername, identityPassword } from './fixtures/identity';
+import environment from '../../environment';
+import { setupTestApp, shutdownTestApp } from '../setup/app';
+import { identityUsername, identityPassword } from '../fixtures/identity';
 import { getHttpRequest } from './graphql-requests';
 
 const {
