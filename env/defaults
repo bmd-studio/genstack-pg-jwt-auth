@@ -1,4 +1,4 @@
-DOCKER_IMAGE=node:12.3.1
+DOCKER_IMAGE=node:12.3.1-alpine
 DEBUG=pg-jwt-auth:*
 
 DEFAULT_HTTP_PORT=4000
