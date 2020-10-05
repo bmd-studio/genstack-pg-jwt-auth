@@ -38,7 +38,7 @@ services:
       - traefik.http.middlewares.${APP_PREFIX}-${SERVICE_NAME}-ratelimit.ratelimit.average=${JWT_AUTH_RATE_LIMIT_AVERAGE}
       - traefik.http.middlewares.${APP_PREFIX}-${SERVICE_NAME}-ratelimit.ratelimit.period=${JWT_AUTH_RATE_LIMIT_PERIOD}
       - traefik.http.middlewares.${APP_PREFIX}-${SERVICE_NAME}-compress.compress=true
-      - traefik.http.middlewares.${APP_PREFIX}-${SERVICE_NAME}-stripprefix.stripprefix.prefixes=/${SERVICE_NAME}
+      - traefik.http.middlewares.${APP_PREFIX}-${SERVICE_NAME}-stripprefix.stripprefix.prefixes=/${APP_PREFIX}/${SERVICE_NAME}
 
       - traefik.http.middlewares.${APP_PREFIX}-${SERVICE_NAME}-middlewares-path.chain.middlewares=${APP_PREFIX}-${SERVICE_NAME}-ratelimit, ${APP_PREFIX}-${SERVICE_NAME}-compress, ${APP_PREFIX}-${SERVICE_NAME}-stripprefix
       - traefik.http.routers.${APP_PREFIX}-${SERVICE_NAME}-path.middlewares=${APP_PREFIX}-${SERVICE_NAME}-middlewares-path
