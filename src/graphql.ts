@@ -16,7 +16,7 @@ const {
   POSTGRES_IDENTITY_ROLES_COLUMN_NAME,
   POSTGRES_IDENTITY_ROLE_NAME,
   
-  POSTGRAPHILE_ACCESS_TOKEN_KEY,
+  ACCESS_TOKEN_KEY,
 
   JWT_IDENTITY_FIELD,
   JWT_IDENTITY_ID_FIELD,
@@ -41,7 +41,7 @@ export const getCredentials = (args: any): Credentials => {
   return {
     username: args?.[POSTGRES_IDENTITY_IDENTIFICATION_COLUMN_NAME],
     password: args?.[POSTGRES_IDENTITY_SECRET_COLUMN_NAME],
-    accessToken: args?.[POSTGRAPHILE_ACCESS_TOKEN_KEY],
+    accessToken: args?.[ACCESS_TOKEN_KEY],
   };
 };
 

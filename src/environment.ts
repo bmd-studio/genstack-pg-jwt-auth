@@ -25,7 +25,7 @@ export default {
 
       GRAPHQL_PATH: '/auth',
       
-      POSTGRAPHILE_ACCESS_TOKEN_KEY: 'accessToken',
+      ACCESS_TOKEN_KEY: 'accessToken',
 
       JWT_IDENTITY_FIELD: 'identity',
       JWT_IDENTITY_ID_FIELD: 'identity_id',
