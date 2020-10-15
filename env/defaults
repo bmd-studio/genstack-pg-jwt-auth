@@ -43,6 +43,8 @@ JWT_ROLE_FIELD=identity_role
 JWT_EXPIRES_IN=5256000
 JWT_CLOCK_TOLERANCE=5
 
+PROXY_ROUTER_DOMAIN=localhost
+
 # variables to run standalone
 APP_PREFIX=postgraphile
 SERVICE_NAME=postgraphile
