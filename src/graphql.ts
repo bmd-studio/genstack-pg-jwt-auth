@@ -16,6 +16,11 @@ const {
   POSTGRES_IDENTITY_ROLES_COLUMN_NAME,
   POSTGRES_IDENTITY_ROLE_NAME,
   
+  JWT_AUTH_LOGIN_MUTATION_NAME,
+  JWT_AUTH_LOGOUT_MUTATION_NAME,
+  JWT_AUTH_CREATE_IDENTITY_MUTATION_NAME,
+  JWT_AUTH_CHANGE_CREDENTIALS_MUTATION_NAME,
+
   ACCESS_TOKEN_KEY,
 
   JWT_IDENTITY_FIELD,
@@ -93,17 +98,17 @@ export const typeDefs = gql`
   }
 
   type Mutation {
-    login(
+    ${JWT_AUTH_LOGIN_MUTATION_NAME}(
       ${POSTGRES_IDENTITY_IDENTIFICATION_COLUMN_NAME}: String! 
       ${POSTGRES_IDENTITY_SECRET_COLUMN_NAME}: String!
       role: String
     ): LoginPayload
-    logout: LogoutPayload
-    createIdentity(
+    ${JWT_AUTH_LOGOUT_MUTATION_NAME}: LogoutPayload
+    ${JWT_AUTH_CREATE_IDENTITY_MUTATION_NAME}(
       ${POSTGRES_IDENTITY_IDENTIFICATION_COLUMN_NAME}: String! 
       ${POSTGRES_IDENTITY_SECRET_COLUMN_NAME}: String!  
     ): LoginPayload
-    changeCredentials(
+    ${JWT_AUTH_CHANGE_CREDENTIALS_MUTATION_NAME}(
       ${POSTGRES_IDENTITY_SECRET_COLUMN_NAME}: String!
       accessToken: String!
     ): LoginPayload
@@ -150,13 +155,13 @@ export const resolvers = {
   Query: {
   },
   Mutation: {
-    login: login,
-    logout: async (): Promise<LogoutPayload> => {
+    [JWT_AUTH_LOGIN_MUTATION_NAME]: login,
+    [JWT_AUTH_LOGOUT_MUTATION_NAME]: async (): Promise<LogoutPayload> => {
       return {
         isLoggedOut: false,
       };
     },
-    createIdentity: async (_parent: any, args: any): Promise<LoginPayload> => {
+    [JWT_AUTH_CREATE_IDENTITY_MUTATION_NAME]: async (_parent: any, args: any): Promise<LoginPayload> => {
       const { username, password } = getCredentials(args);
       const identity = await createIdentity(username, password);
 
@@ -168,7 +173,7 @@ export const resolvers = {
 
       return login(_parent, args);
     },
-    changeCredentials: async (_parent: any, args: any): Promise<LoginPayload> => {
+    [JWT_AUTH_CHANGE_CREDENTIALS_MUTATION_NAME]: async (_parent: any, args: any): Promise<LoginPayload> => {
       const { password, accessToken } = getCredentials(args);
 
       // guard: make sure the token is valid

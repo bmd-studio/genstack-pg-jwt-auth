@@ -23,6 +23,11 @@ export default {
 
       DATABASE_ID_COLUMN_NAME: 'id',
 
+      JWT_AUTH_LOGIN_MUTATION_NAME: 'login',
+      JWT_AUTH_LOGOUT_MUTATION_NAME: 'logout',
+      JWT_AUTH_CREATE_IDENTITY_MUTATION_NAME: 'createIdentity',
+      JWT_AUTH_CHANGE_CREDENTIALS_MUTATION_NAME: 'changeCredentials',
+
       GRAPHQL_PATH: '/auth',
       
       ACCESS_TOKEN_KEY: 'accessToken',
