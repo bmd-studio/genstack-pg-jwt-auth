@@ -46,8 +46,8 @@ JWT_CLOCK_TOLERANCE=5
 PROXY_ROUTER_DOMAIN=localhost
 
 # variables to run standalone
-APP_PREFIX=postgraphile
-SERVICE_NAME=postgraphile
+APP_PREFIX=pg-jwt-auth
+SERVICE_NAME=pg-jwt-auth
 
 DOCKER_RESTART_POLICY=unless-stopped
 DOCKER_LOGGING_DRIVER=json-file
