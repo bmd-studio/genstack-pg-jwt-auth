@@ -1,9 +1,13 @@
 import debug from 'debug';
 import chalk from 'chalk';
 
+import environment from './environment';
+
 const DEBUG_NAMESPACE = 'pg-jwt-auth';
 const infoInstance = debug(`${DEBUG_NAMESPACE}:info`);
 const errorInstance = debug(`${DEBUG_NAMESPACE}:error`);
+
+debug.enable(environment.env.DEBUG);
 
 export const info = (...args: any[]): void => {
   return infoInstance(chalk.blue('[INFO]'), ...args);

@@ -1,5 +1,6 @@
 import { connectDatabase } from './database';
 import { initializeServer } from './server';
+
 import logger from './logger';
 
 export interface LoginPayload {
@@ -36,7 +37,7 @@ export const main = async (): Promise<void> => {
 main().then(() => {
   logger.info(`🚀 Ready to receive authentication requests.`);
 }).catch((error) => {
-  logger.error(`An unknown error occurred:`);
+  logger.error(`An error occurred:`);
   logger.error(error);
   process.exit(1); 
 });

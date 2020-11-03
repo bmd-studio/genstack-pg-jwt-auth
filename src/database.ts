@@ -106,8 +106,6 @@ export const connectDatabase = async (): Promise<void> => {
 
       // guard: check for connection error
       if (error) {
-        logger.error(`An error occurred when connecting to the database...`);
-        logger.error(error);
         reject(error);
         return;
       }

@@ -10,7 +10,7 @@ import templateIdentity from '../fixtures/identity';
 const POSTGRES_INTERNAL_PORT = 5432;
 
 const POSTGRES_DOCKER_IMAGE = 'postgres';
-const POSTGRES_DOCKER_TAG = '11.5-alpine';
+const POSTGRES_DOCKER_TAG = '13.0-alpine';
 
 const APP_PREFIX = 'test';
 const POSTGRES_HOST_NAME = '0.0.0.0';

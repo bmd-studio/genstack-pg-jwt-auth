@@ -1,20 +1,20 @@
 # genstack-container-pg-jwt-auth
 ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/bmd-studio/genstack-container-pg-jwt-auth/test)
 
-## Debugging
-The `DEBUG` environment variable is used for debugging using the `pg-jwt-auth` namespace.
+## Getting started
 
-To enable info logs:
+### Installation
+Install all dependencies:
 ```
-DEBUG=pg-to-mqtt:info
-```
-
-To enable errors:
-```
-DEBUG=pg-to-mqtt:error
+yarn setup
 ```
 
-To enable all:
+### Running
+To run while connecting with a specific database:
 ```
-DEBUG=pg-to-mqtt:*
+yarn cross-env APP_PREFIX=project POSTGRES_DATABASE_NAME=project POSTGRES_HOST_NAME=localhost POSTGRES_PORT=5432 yarn start
 ```
+
+## Environment variables
+
+
