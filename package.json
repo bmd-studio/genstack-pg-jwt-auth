@@ -40,7 +40,7 @@
     "@types/lodash": "4.14.150",
     "@types/pg": "7.14.3",
     "@types/supertest": "2.0.10",
-    "@types/uuid": "7.0.4",
+    "@types/uuid": "8.3.0",
     "cross-env": "7.0.2",
     "get-port": "5.1.1",
     "http-status-codes": "1.4.0",
