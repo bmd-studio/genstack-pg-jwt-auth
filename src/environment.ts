@@ -2,8 +2,9 @@ export default {
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   get env() {
     return {
-      APP_PREFIX: 'pg-jwt-auth', 
-      DEBUG: 'pg-jwt-auth:*',
+      APP_PREFIX: 'project', 
+      DEBUG: 'pg-jwt-auth:error,pg-jwt-auth:info',
+      DEBUG_NAMESPACE: 'pg-jwt-auth',
 
       DEFAULT_HTTP_PORT: 4000,
 
