@@ -34,6 +34,7 @@ export const main = async (): Promise<void> => {
   await initializeServer();
 };
 
+logger.info(`Starting the main process...`);
 main().then(() => {
   logger.info(`🚀 Ready to receive authentication requests.`);
 }).catch((error) => {

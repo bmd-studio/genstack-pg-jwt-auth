@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import pg from 'pg';
 import bcrypt from 'bcrypt';
+import chalk from 'chalk';
 
 import { Identity } from './index';
 import environment from './environment';
@@ -92,20 +93,26 @@ export const connectDatabase = async (): Promise<void> => {
     POSTGRES_ADMIN_ROLE_NAME,
     POSTGRES_ADMIN_SECRET,
   } = environment.env;
+  const user = `${APP_PREFIX}_${POSTGRES_ADMIN_ROLE_NAME}`;
+
+  logger.info(`Initializing database connection on ${chalk.underline(POSTGRES_HOST_NAME)}:${chalk.underline(POSTGRES_PORT)} with user ${chalk.underline(user)}`);
 
   pgClient = new pg.Client({
     host: POSTGRES_HOST_NAME,
     port: parseInt(POSTGRES_PORT),
     database: POSTGRES_DATABASE_NAME,
-    user: `${APP_PREFIX}_${POSTGRES_ADMIN_ROLE_NAME}`,
+    user: user,
     password: POSTGRES_ADMIN_SECRET,
   });
 
   return new Promise((resolve, reject) => {
+
+    logger.info(`Connecting to database...`);
     pgClient.connect((error: any) => {
 
       // guard: check for connection error
       if (error) {
+        logger.error(`An error occurred when connecting to the database...`)
         reject(error);
         return;
       }
