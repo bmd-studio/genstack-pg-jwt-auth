@@ -1,3 +1,14 @@
+import dotenvParseVariables from 'dotenv-parse-variables';
+
+const parseEnv = (envUnparsed: any) => {
+  return dotenvParseVariables(envUnparsed, {
+    assignToProcessEnv: false,
+    overrideProcessEnv: false,
+  });
+};
+
+const parsedProcessEnv = parseEnv(process.env);
+
 export default {
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   get env() {
@@ -43,7 +54,7 @@ export default {
       JWT_SECRET: 'unknown',
       JWT_CLOCK_TOLERANCE: '5',
 
-      ...process.env,
+      ...parsedProcessEnv,
     };
-  }
+  },
 };
