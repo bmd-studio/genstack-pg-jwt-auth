@@ -7,11 +7,11 @@ const parseEnv = (envUnparsed: any) => {
   });
 };
 
-const parsedProcessEnv = parseEnv(process.env);
-
 export default {
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   get env() {
+    const parsedProcessEnv = parseEnv(process.env);
+
     return {
       APP_PREFIX: 'project', 
       DEBUG: 'pg-jwt-auth:error,pg-jwt-auth:info',
