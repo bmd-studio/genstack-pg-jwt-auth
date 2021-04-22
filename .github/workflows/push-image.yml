@@ -47,5 +47,5 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
-            - GS_ENV=${{ env.GS_ENV }}
-            - DOCKER_BASE_IMAGE=${{ env.DOCKER_BASE_IMAGE }}
+            GS_ENV=${{ env.GS_ENV }}
+            DOCKER_BASE_IMAGE=${{ env.DOCKER_BASE_IMAGE }}
