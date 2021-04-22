@@ -50,7 +50,7 @@
     "pm2": "4.5.5",
     "rimraf": "3.0.2",
     "supertest": "6.1.3",
-    "testcontainers": "6.4.2",
+    "testcontainers": "7.8.0",
     "ts-jest": "26.5.4",
     "ts-node": "9.1.1",
     "typescript": "4.2.3"
