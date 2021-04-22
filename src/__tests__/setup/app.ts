@@ -9,8 +9,7 @@ import templateIdentity from '../fixtures/identity';
 
 const POSTGRES_INTERNAL_PORT = 5432;
 
-const POSTGRES_DOCKER_IMAGE = 'postgres';
-const POSTGRES_DOCKER_TAG = '13.0-alpine';
+const POSTGRES_DOCKER_IMAGE = 'postgres:13.2-alpine';
 
 const APP_PREFIX = 'test';
 const POSTGRES_HOST_NAME = '0.0.0.0';
@@ -22,7 +21,7 @@ const POSTGRES_USER = `${APP_PREFIX}_${POSTGRES_ADMIN_ROLE_NAME}`;
 let pgContainer: StartedTestContainer; 
 
 const setupTestContainers = async(): Promise<void> => {
-  pgContainer = await new GenericContainer(POSTGRES_DOCKER_IMAGE, POSTGRES_DOCKER_TAG)
+  pgContainer = await new GenericContainer(POSTGRES_DOCKER_IMAGE)
     .withExposedPorts(POSTGRES_INTERNAL_PORT)
     .withEnv('POSTGRES_USER', POSTGRES_USER)
     .withEnv('POSTGRES_PASSWORD', POSTGRES_ADMIN_SECRET)
