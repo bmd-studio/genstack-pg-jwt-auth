@@ -1,5 +1,16 @@
 import dotenvParseVariables from 'dotenv-parse-variables';
 
+export enum TestMode {
+  Default = 'default',
+  Container = 'container',
+}
+
+export const isTestingContainer = () => {
+  const { TEST_MODE } = environment.env;
+
+  return TEST_MODE === TestMode.Container;
+};
+
 const parseEnv = (envUnparsed: any) => {
   return dotenvParseVariables(envUnparsed, {
     assignToProcessEnv: false,
@@ -7,7 +18,7 @@ const parseEnv = (envUnparsed: any) => {
   });
 };
 
-export default {
+const environment = {
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   get env() {
     const parsedProcessEnv = parseEnv(process.env);
@@ -16,6 +27,7 @@ export default {
       APP_PREFIX: 'project', 
       DEBUG: 'pg-jwt-auth:error,pg-jwt-auth:info',
       DEBUG_NAMESPACE: 'pg-jwt-auth',
+      TEST_MODE: TestMode.Default,
 
       DEFAULT_HTTP_PORT: 4000,
 
@@ -58,3 +70,5 @@ export default {
     };
   },
 };
+
+export default environment;

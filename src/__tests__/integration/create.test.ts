@@ -47,12 +47,22 @@ describe('create', () => {
     await shutdownTestApp();
   });
 
+  // it('temporary delay to keep test server open', async() => {
+  //   expect.assertions(1);
+    
+  //   await new Promise<void>((resolve) => {
+  //     setTimeout(() => {
+  //       resolve();
+  //     }, 100000);
+  //   })
+  // }, 100000);
+
   it('should not accept duplicate username', async () => {
     const response = await performCreate(identityUsername, identityPassword);
     const accessToken = getAccessToken(response);
 
     expect(accessToken).toBeFalsy();
-  });   
+  });
 
   it('should accept valid credentials', async () => {
     const secondIdentityUsername = `${identityUsername}-2`;

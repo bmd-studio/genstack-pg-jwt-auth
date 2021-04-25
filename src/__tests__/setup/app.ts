@@ -1,15 +1,17 @@
 import _ from 'lodash';
-import { GenericContainer, StartedTestContainer } from 'testcontainers';
+import { GenericContainer, Network, StartedNetwork, StartedTestContainer, Wait } from 'testcontainers';
 import getPort from 'get-port';
 
 import { connectDatabase, disconnectDatabase, getClient } from '../../database';
 import { initializeServer, shutdownServer } from '../../server';
-import environment from '../../environment';
+import environment, { isTestingContainer } from '../../environment';
 import templateIdentity from '../fixtures/identity';
 
 const POSTGRES_INTERNAL_PORT = 5432;
+const HTTP_INTERNAL_PORT = 4000;
 
 const POSTGRES_DOCKER_IMAGE = 'postgres:13.2-alpine';
+const PG_JWT_AUTH_DOCKER_IMAGE = 'ghcr.io/bmd-studio/genstack-pg-jwt-auth:latest';
 
 const APP_PREFIX = 'test';
 const POSTGRES_HOST_NAME = '0.0.0.0';
@@ -18,10 +20,16 @@ const POSTGRES_ADMIN_ROLE_NAME = `admin`;
 const POSTGRES_ADMIN_SECRET = 'password';
 const POSTGRES_USER = `${APP_PREFIX}_${POSTGRES_ADMIN_ROLE_NAME}`;
 
+let network: StartedNetwork;
 let pgContainer: StartedTestContainer; 
+let pgJwtAuthContainer: StartedTestContainer;
 
-const setupTestContainers = async(): Promise<void> => {
+const setupSupportingContainers = async(): Promise<void> => {
+  network = await new Network()
+    .start();
+
   pgContainer = await new GenericContainer(POSTGRES_DOCKER_IMAGE)
+    .withNetworkMode(network.getName())
     .withExposedPorts(POSTGRES_INTERNAL_PORT)
     .withEnv('POSTGRES_USER', POSTGRES_USER)
     .withEnv('POSTGRES_PASSWORD', POSTGRES_ADMIN_SECRET)
@@ -29,16 +37,30 @@ const setupTestContainers = async(): Promise<void> => {
     .start();
 };
 
-const shutdownTestContainers = async(): Promise<void> => {
-  await pgContainer.stop();
+const setupTestContainer = async(): Promise<void> => {
+  pgJwtAuthContainer = await new GenericContainer(PG_JWT_AUTH_DOCKER_IMAGE)
+    .withNetworkMode(network.getName())
+    .withExposedPorts(HTTP_INTERNAL_PORT)
+    .withEnv('APP_PREFIX', APP_PREFIX)
+    .withEnv('DEFAULT_HTTP_PORT', String(HTTP_INTERNAL_PORT))
+    .withEnv('POSTGRES_HOST_NAME', pgContainer?.getIpAddress(network.getName()))
+    .withEnv('POSTGRES_ADMIN_ROLE_NAME', POSTGRES_ADMIN_ROLE_NAME)
+    .withEnv('POSTGRES_ADMIN_SECRET', POSTGRES_ADMIN_SECRET)
+    .withEnv('POSTGRES_DATABASE_NAME', POSTGRES_DATABASE_NAME)    
+    .start();
+};
+
+const shutdownContainers = async(): Promise<void> => {
+  await pgContainer?.stop();
+  await pgJwtAuthContainer?.stop();
 };
 
 const setupEnv = async (): Promise<void> => {
+  const httpPort = pgJwtAuthContainer?.getMappedPort(HTTP_INTERNAL_PORT)?.toString() ?? await getPort();
+
   _.assignIn(process.env, {
     APP_PREFIX,
-
-    DEFAULT_HTTP_PORT: await getPort(),
-
+    DEFAULT_HTTP_PORT: httpPort,
     POSTGRES_HOST_NAME,
     POSTGRES_PORT: pgContainer.getMappedPort(POSTGRES_INTERNAL_PORT).toString(),
     POSTGRES_DATABASE_NAME, 
@@ -75,15 +97,20 @@ const setupDatabase = async (): Promise<void> => {
 };
 
 export const setupTestApp = async (): Promise<void> => {
-  await setupTestContainers();
+  await setupSupportingContainers();
   await setupEnv();
   await connectDatabase();
   await setupDatabase();
-  await initializeServer();
+  
+  if (isTestingContainer()) {
+    await setupTestContainer();
+  } else {
+    await initializeServer();
+  }
 };
 
 export const shutdownTestApp = async (): Promise<void> => {
   await shutdownServer();
   await disconnectDatabase();
-  await shutdownTestContainers();
+  await shutdownContainers();
 };
