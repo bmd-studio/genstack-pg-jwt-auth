@@ -53,7 +53,7 @@ jobs:
             GS_ENV=production
             DOCKER_BASE_IMAGE=${{ env.DOCKER_BASE_IMAGE }}
       - name: Setup test
-        run: yarn setup      
+        run: yarn setup --production=false  
       - name: Test new image
         run: yarn test:container 
       - name: Push image
