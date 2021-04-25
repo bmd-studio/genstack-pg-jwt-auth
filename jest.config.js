@@ -1,6 +1,6 @@
 module.exports = {
   collectCoverage: true,
-  testTimeout: 20000,
+  testTimeout: 120 * 1000,
   roots: [
     '<rootDir>/src'
   ],
