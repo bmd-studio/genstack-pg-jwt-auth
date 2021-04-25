@@ -1,4 +1,4 @@
-name: Test & tag version
+name: Test & tag
 on: push
 jobs:
   test:

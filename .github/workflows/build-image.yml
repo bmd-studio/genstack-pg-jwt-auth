@@ -1,5 +1,4 @@
 name: Build image
-
 on:
   push:
     tags:
