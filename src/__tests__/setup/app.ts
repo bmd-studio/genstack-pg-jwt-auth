@@ -56,13 +56,13 @@ const shutdownContainers = async(): Promise<void> => {
 };
 
 const setupEnv = async (): Promise<void> => {
-  const httpPort = pgJwtAuthContainer?.getMappedPort(HTTP_INTERNAL_PORT)?.toString() ?? await getPort();
+  const httpPort = pgJwtAuthContainer?.getMappedPort(HTTP_INTERNAL_PORT) ?? await getPort();
 
   _.assignIn(process.env, {
     APP_PREFIX,
     DEFAULT_HTTP_PORT: httpPort,
     POSTGRES_HOST_NAME,
-    POSTGRES_PORT: pgContainer.getMappedPort(POSTGRES_INTERNAL_PORT).toString(),
+    POSTGRES_PORT: pgContainer.getMappedPort(POSTGRES_INTERNAL_PORT),
     POSTGRES_DATABASE_NAME, 
     POSTGRES_ADMIN_ROLE_NAME,
     POSTGRES_ADMIN_SECRET,
