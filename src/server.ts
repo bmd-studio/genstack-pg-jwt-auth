@@ -11,9 +11,9 @@ const {
 } = environment.env;
 
 export const app = express();
-export const server = new ApolloServer({ 
-  typeDefs, 
-  resolvers 
+export const server = new ApolloServer({
+  typeDefs,
+  resolvers
 });
 
 server.applyMiddleware({

@@ -5,7 +5,7 @@ const {
 } = process.env;
 
 module.exports = {
-  apps: [       
+  apps: [
     {
       name: SERVICE_NAME,
       script: 'yarn',
@@ -17,7 +17,7 @@ module.exports = {
       ignore_watch: ['node_modules'],
       watch_options: {
         usePolling: true,
-      },              
+      },
     },
   ],
 };
