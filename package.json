@@ -1,6 +1,6 @@
 {
-  "name": "@bmd-studio/genstack-container-pg-jwt-auth",
-  "private": true,
+  "name": "@bmd-studio/genstack-pg-jwt-auth",
+	"version": "2.0.0",
   "main": "dist/index.js",
   "types": "dist/index",
   "scripts": {
