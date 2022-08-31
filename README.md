@@ -1,5 +1,5 @@
-# genstack-container-pg-jwt-auth
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/bmd-studio/genstack-container-pg-jwt-auth/test)
+# genstack-pg-jwt-auth
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/bmd-studio/genstack-pg-jwt-auth/test)
 
 ## Getting started
 
