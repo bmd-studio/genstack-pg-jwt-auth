@@ -20,4 +20,23 @@ export interface Credentials {
   accessToken?: string;
 }
 
+export interface ProcessOptions {
+  serverOptions?: ServerOptions;
+  postgresOptions?: PostgresOptions;
+}
+
+export interface ServerOptions {
+  port?: number;
+  path?: string;
+  healthcheckPath?: string;
+}
+
+export interface PostgresOptions {
+  host?: string;
+  port?: number;
+  user?: string;
+  password?: string;
+  database?: string;
+}
+
 export { startProcess, stopProcess } from './process';

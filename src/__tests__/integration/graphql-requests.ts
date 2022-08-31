@@ -1,6 +1,5 @@
 import request from 'supertest';
 
-import { app } from '../../server';
 import environment from '../../environment';
 
 const {
@@ -8,6 +7,7 @@ const {
 } = environment.env;
 
 export const getHttpRequest = (): request.Test => {
+  const app = require('../../server').expressApp;
   const httpRequest = request(app).post(GRAPHQL_PATH);
   httpRequest.set('Accept', 'application/json');
 

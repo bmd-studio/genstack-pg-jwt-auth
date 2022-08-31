@@ -3,7 +3,7 @@ import pg from 'pg';
 import bcrypt from 'bcrypt';
 import chalk from 'chalk';
 
-import { Identity } from './index';
+import { Identity, PostgresOptions } from './index';
 import environment from './environment';
 import logger from './logger';
 
@@ -12,7 +12,7 @@ const {
 
   POSTGRES_IDENTITY_TABLE_NAME,
   POSTGRES_IDENTITY_IDENTIFICATION_COLUMN_NAME,
-  POSTGRES_IDENTITY_SECRET_COLUMN_NAME ,  
+  POSTGRES_IDENTITY_SECRET_COLUMN_NAME,
   POSTGRES_HIDDEN_COLUMN_NAMES,
 } = environment.env;
 
@@ -24,31 +24,31 @@ export const getClient = (): pg.Client => {
 
 export const formatIdentity = (identity: Identity): Identity => {
   const hiddenColumnNames = _.concat(
-    _.split(POSTGRES_HIDDEN_COLUMN_NAMES, ','), 
+    _.split(POSTGRES_HIDDEN_COLUMN_NAMES, ','),
     [POSTGRES_IDENTITY_SECRET_COLUMN_NAME]
   );
 
   // remove hidden fields
   _.map(hiddenColumnNames, (hiddenColumnName: string) => {
     delete identity?.[hiddenColumnName];
-  });  
+  });
 
   return identity;
 };
 
 export const queryIdentityTable = async (query: string, variables?: string[]): Promise<Identity> => {
-  const identityResult = await pgClient.query(query, variables); 
+  const identityResult = await pgClient.query(query, variables);
   const identity: Identity = identityResult?.rows?.[0] as Identity;
   return identity;
 };
 
 export const getIdentity = async (username: string): Promise<Identity> => {
   return await queryIdentityTable(`
-    SELECT 
-      * 
-    FROM 
+    SELECT
+      *
+    FROM
       ${POSTGRES_IDENTITY_TABLE_NAME}
-    WHERE 
+    WHERE
       ${POSTGRES_IDENTITY_IDENTIFICATION_COLUMN_NAME} = $1
     LIMIT 1
   `, [username]);
@@ -58,51 +58,56 @@ export const createIdentity = async (username: string, password: string): Promis
   const hashedPassword = await bcrypt.hash(password, parseInt(BCRYPT_SALT_ROUNDS));
 
   return await queryIdentityTable(`
-    INSERT INTO 
+    INSERT INTO
       ${POSTGRES_IDENTITY_TABLE_NAME}
       (${POSTGRES_IDENTITY_IDENTIFICATION_COLUMN_NAME}, ${POSTGRES_IDENTITY_SECRET_COLUMN_NAME})
-    VALUES 
+    VALUES
       ($1, $2)
-    RETURNING 
+    RETURNING
       *
-  `, [username, hashedPassword]); 
+  `, [username, hashedPassword]);
 };
 
 export const changePassword = async (username: string, password: string): Promise<Identity> => {
   const hashedPassword = await bcrypt.hash(password, parseInt(BCRYPT_SALT_ROUNDS));
 
   return queryIdentityTable(`
-    UPDATE 
+    UPDATE
       ${POSTGRES_IDENTITY_TABLE_NAME}
-    SET 
+    SET
       ${POSTGRES_IDENTITY_SECRET_COLUMN_NAME} = $1
-    WHERE 
+    WHERE
       ${POSTGRES_IDENTITY_IDENTIFICATION_COLUMN_NAME} = $2
-    RETURNING 
+    RETURNING
       *
-  `, [hashedPassword, username]); 
+  `, [hashedPassword, username]);
 };
 
-export const connectDatabase = async (): Promise<void> => {
+export const connectDatabase = async (options?: PostgresOptions): Promise<void> => {
   // include the constants here to allow test environments to change it before connecting
   const {
-    APP_PREFIX, 
+    APP_PREFIX,
     POSTGRES_HOST_NAME,
     POSTGRES_PORT,
     POSTGRES_DATABASE_NAME,
     POSTGRES_ADMIN_ROLE_NAME,
     POSTGRES_ADMIN_SECRET,
   } = environment.env;
-  const user = `${APP_PREFIX}_${POSTGRES_ADMIN_ROLE_NAME}`;
+  const {
+    host = POSTGRES_HOST_NAME, port = POSTGRES_PORT,
+    user = POSTGRES_ADMIN_ROLE_NAME, password = POSTGRES_ADMIN_SECRET,
+    database = POSTGRES_DATABASE_NAME,
+  } = options ?? {};
+  const prefixedUser = `${APP_PREFIX}_${user}`;
 
-  logger.info(`Initializing database connection on ${chalk.underline(POSTGRES_HOST_NAME)}:${chalk.underline(POSTGRES_PORT)} with user ${chalk.underline(user)}`);
+  logger.info(`Initializing database connection on ${chalk.underline(host)}:${chalk.underline(port)} with user ${chalk.underline(prefixedUser)}`);
 
   pgClient = new pg.Client({
-    host: POSTGRES_HOST_NAME,
-    port: parseInt(POSTGRES_PORT),
-    database: POSTGRES_DATABASE_NAME,
-    user: user,
-    password: POSTGRES_ADMIN_SECRET,
+    host: host,
+    port: parseInt(String(port)),
+    database: database,
+    user: prefixedUser,
+    password: password,
   });
 
   return new Promise((resolve, reject) => {
@@ -116,7 +121,7 @@ export const connectDatabase = async (): Promise<void> => {
         reject(error);
         return;
       }
-      
+
       logger.info(`Successfully connected to the database!`);
       resolve();
     });

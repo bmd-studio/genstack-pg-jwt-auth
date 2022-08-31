@@ -1,16 +1,18 @@
+import { ProcessOptions } from './index';
 import { connectDatabase, disconnectDatabase } from './database';
 import { initializeServer, shutdownServer } from './server';
 
 /**
  * Connect to the database and start the GraphQL server.
  */
-export const startProcess = async (): Promise<void> => {
+export const startProcess = async (options?: ProcessOptions): Promise<void> => {
+  const { postgresOptions, serverOptions } = options ?? {};
 
   // wait until the database is fully connected
-  await connectDatabase();
+  await connectDatabase(postgresOptions);
 
   // initialize the server to listen on the specified port
-  await initializeServer();
+  await initializeServer(serverOptions);
 };
 
 /**
