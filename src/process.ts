@@ -17,6 +17,6 @@ export const startProcess = async (): Promise<void> => {
  * Disconnect from the database and stop the GraphQL server.
  */
 export const stopProcess = async(): Promise<void> => {
-	await shutdownServer();
-	await disconnectDatabase();
+  await shutdownServer();
+  await disconnectDatabase();
 };

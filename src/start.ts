@@ -8,12 +8,12 @@ process.on('SIGINT', () => {
 });
 
 (async(): Promise<void> => {
-	try {
-		await startProcess();
-		logger.info(`🚀 Ready to receive authentication requests.`);
-	} catch (error) {
-		logger.error(`An error occurred during startup:`);
-		logger.error(error);
-		process.exit(1);
-	}
+  try {
+    await startProcess();
+    logger.info(`🚀 Ready to receive authentication requests.`);
+  } catch (error) {
+    logger.error(`An error occurred during startup:`);
+    logger.error(error);
+    process.exit(1);
+  }
 })();
