@@ -64,7 +64,7 @@
   "devDependencies": {
     "@types/bcrypt": "5.0.0",
     "@types/debug": "4.1.7",
-    "@types/dotenv-parse-variables": "0.2.0",
+    "@types/dotenv-parse-variables": "2.0.1",
     "@types/jest": "26.0.24",
     "@types/jsonwebtoken": "8.5.4",
     "@types/lodash": "4.14.171",

@@ -808,10 +808,10 @@
   dependencies:
     "@types/node" "*"
 
-"@types/dotenv-parse-variables@0.2.0":
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/@types/dotenv-parse-variables/-/dotenv-parse-variables-0.2.0.tgz#51c88f6dd25dcb2c537c4fbb78030ab5a84d7990"
-  integrity sha512-cXcRY5lFectjMEGkUsVpRhPCO5xAR9AdzxUBQJrWouQH+nPABZ5R8iZeGGDXRHrzQmFK9P/DrYb3VgQTyAMVsA==
+"@types/dotenv-parse-variables@2.0.1":
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/@types/dotenv-parse-variables/-/dotenv-parse-variables-2.0.1.tgz#b0af93ee6c628e4da671acec5d287a8a269b492d"
+  integrity sha512-yVpxNd1MxSno/Jjen+Kepjif9h/HyqOu7jSuB4rD7yWUgNbuNMzhiqRj5LQl99T635JbZbGwoebfrZBlipazAA==
 
 "@types/express-serve-static-core@^4.17.18":
   version "4.17.19"
