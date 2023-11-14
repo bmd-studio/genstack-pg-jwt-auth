@@ -49,7 +49,7 @@
     "env/defaults"
   ],
   "dependencies": {
-    "apollo-server-express": "2.25.2",
+    "apollo-server-express": "3.13.0",
     "bcrypt": "5.0.1",
     "chalk": "4.1.1",
     "debug": "4.3.2",
